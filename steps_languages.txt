@@ -1,0 +1,264 @@
+// 创建 l10n 文件夹和 arb 文件
+// lib/i18n
+// lib/i18n/app_en.arb
+///app_en.arb
+{
+  "manageUsersTitle": "Manage Users",
+  "userName": "User Name",
+  "email": "Email",
+  "addUser": "Add User"
+}
+///app_zh.arb
+{
+  "manageUsersTitle": "管理用户",
+  "userName": "用户名",
+  "email": "电子邮件",
+  "addUser": "添加用户"
+}
+
+
+
+/**********************************************************************/
+
+
+
+// pubspec.yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - lib/i18n/
+
+
+/**********************************************************************/
+
+
+
+// projectname/l10n.yaml
+arb-dir: lib/i18n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+
+
+
+/**********************************************************************/
+
+
+
+// lib/services/localization_service.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
+import '../i18n/app_localizations.dart';
+
+class LocalizationService {
+  static Locale? locale;
+
+  static List<Locale> get supportedLocales => [
+    Locale('en', ''),
+    Locale('zh', ''),
+  ];
+
+  static Iterable<LocalizationsDelegate<dynamic>> get localizationsDelegates => [
+    AppLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
+
+  static void setLocale(BuildContext context, Locale newLocale) {
+    locale = newLocale;
+    MyApp.setLocale(context, newLocale);
+  }
+}
+
+
+
+/**********************************************************************/
+
+
+
+// main.dart
+
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'i18n/app_localizations.dart';
+import 'services/localization_service.dart';
+import 'pages/manage_users_page.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _MyAppState state = context.findAncestorStateOfType<_MyAppState>()!;
+    state.setLocale(newLocale);
+  }
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale _locale = Locale('en');
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      locale: _locale,
+      supportedLocales: LocalizationService.supportedLocales,
+      localizationsDelegates: LocalizationService.localizationsDelegates,
+      home: ManageUsersPage(),
+    );
+  }
+}
+
+
+/**********************************************************************/
+
+
+
+// lib/i18n/app_localizations.dart
+
+
+import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'intl/messages_all.dart';
+
+class AppLocalizations {
+  AppLocalizations();
+
+  static AppLocalizations? _current;
+
+  static AppLocalizations get current {
+    assert(_current != null,
+        'No instance of AppLocalizations was loaded. Try to initialize the AppLocalizations delegate before accessing AppLocalizations.current.');
+    return _current!;
+  }
+
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
+
+  static Future<AppLocalizations> load(Locale locale) {
+    final name = locale.countryCode?.isEmpty ?? false ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
+    return initializeMessages(localeName).then((_) {
+      Intl.defaultLocale = localeName;
+      final instance = AppLocalizations();
+      AppLocalizations._current = instance;
+
+      return instance;
+    });
+  }
+
+  static AppLocalizations of(BuildContext context) {
+    final instance = AppLocalizations.maybeOf(context);
+    assert(instance != null,
+        'No instance of AppLocalizations present in the widget tree. Did you add AppLocalizations.delegate in localizationsDelegates?');
+    return instance!;
+  }
+
+  static AppLocalizations? maybeOf(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  }
+
+  // Example strings
+  String get manageUsersTitle {
+    return Intl.message(
+      'Manage Users',
+      name: 'manageUsersTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get userName {
+    return Intl.message(
+      'User Name',
+      name: 'userName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get addUser {
+    return Intl.message(
+      'Add User',
+      name: 'addUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // Add other strings here...
+}
+
+class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
+  const AppLocalizationDelegate();
+
+  @override
+  bool isSupported(Locale locale) {
+    return <String>['en', 'zh'].contains(locale.languageCode);
+  }
+
+  @override
+  Future<AppLocalizations> load(Locale locale) {
+    return AppLocalizations.load(locale);
+  }
+
+  @override
+  bool shouldReload(AppLocalizationDelegate old) => false;
+}
+
+
+
+/**********************************************************************/
+
+
+
+terminal run:
+flutter pub get
+flutter gen-l10n
+
+if cannot, pubspec.yaml add,
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  intl_translation: ^0.20.0
+
+if cannot, terminal paste & run:
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/i18n lib/i18n/app_localizations.dart lib/i18n/*.arb
+
+flutter pub pub run intl_translation:extract_to_arb --output-dir=lib/i18n lib/i18n/app_localizations.dart
+flutter pub pub run intl_translation:generate_from_arb --output-dir=lib/i18n --no-use-deferred-loading lib/i18n/app_localizations.dart lib/i18n/app_en.arb lib/i18n/app_zh.arb
+
+
+//
+flutter pub get
+flutter pub run intl_translation:extract_to_arb --output-dir=lib/i18n lib/i18n/app_localizations.dart
+flutter pub run intl_translation:generate_from_arb --output-dir=lib/i18n --no-use-deferred-loading lib/i18n/app_localizations.dart lib/i18n/app_en.arb lib/i18n/app_zh.arb

@@ -1,0 +1,142 @@
+{
+    "@@locale": "en",
+    "language": "English",
+    "@language": {
+      "description": "The current Language"
+    },
+    "login": "Login",
+    "@login": {
+      "description": "Login button text"
+    },
+    "signIn": "Sign in",
+    "@signIn": {
+      "description": "Sign in button text"
+    },
+    "forgotPassword": "Forgot Password?",
+    "@forgotPassword": {
+      "description": "Forgot password button text"
+    },
+    "email": "Email",
+    "@email": {
+      "description": "Email field label"
+    },
+    "password": "Password",
+    "@password": {
+      "description": "Password field label"
+    },
+    "userId": "User ID",
+    "@userId": {
+      "description": "User ID field label"
+    },
+    "welcomeBack": "Welcome Back",
+    "@welcomeBack": {
+      "description": "Welcome back message"
+    },
+    "fillInfo": "Fill out the information below to access your account.",
+    "@fillInfo": {
+      "description": "Prompt to fill in login information"
+    },
+    "adminAccount": "Admin Account",
+    "@adminAccount": {
+      "description": "Admin account message"
+    },
+    "startInfo": "Let's get started by filling out the information below.",
+    "@startInfo": {
+      "description": "Prompt to fill in admin login information"
+    },
+    "orSignInWith": "Or sign in with",
+    "@orSignInWith": {
+      "description": "Alternative sign-in methods message"
+    },
+    "selectLanguage": "Select Language",
+    "@selectLanguage": {
+      "description": "Select language dialog title"
+    },
+    "userHomePage": "User Home Page",
+    "@userHomePage": {
+      "description": "User home page title"
+    },
+    "orderSummary": "Order Summary",
+    "@orderSummary": {
+      "description": "Order summary title"
+    },
+    "belowList": "Below is a list of your items.",
+    "@belowList": {
+      "description": "Order summary description"
+    },
+    "total": "Total",
+    "@total": {
+      "description": "Total price label"
+    },
+    "checkout": "Checkout",
+    "@checkout": {
+      "description": "Checkout button text"
+    },
+    "featuredProducts": "Featured Products",
+    "@featuredProducts": {
+      "description": "Featured products section title"
+    },
+    "currency": "Currency",
+    "@currency": {
+      "description": "Currency field label"
+    },
+    "quantity": "Quantity: {quantity}",
+    "@quantity": {
+      "description": "Item quantity",
+      "placeholders": {
+        "quantity": {
+          "type": "String"
+        }
+      }
+    },
+    "itemName": "Item Name",
+    "@itemName": {
+      "description": "Placeholder for item name"
+    },
+    "deleteItem": "Delete",
+    "@deleteItem": {
+      "description": "Delete item button text"
+    },
+    "menu": "Menu",
+    "@menu": {
+      "description": "Menu button text"
+    },
+    "usd": "USD",
+    "@usd": {
+      "description": "US Dollar"
+    },
+    "eur": "EUR",
+    "@eur": {
+      "description": "Euro"
+    },
+    "vnd": "VND",
+    "@vnd": {
+      "description": "Vietnamese Dong"
+    },
+    "inr": "INR",
+    "@inr": {
+      "description": "Indian Rupee"
+    },
+    "getStarted": "Get Started",
+    "@getStarted": {
+      "description": "Get started button text"
+    },
+    "conversionRate": "Conversion Rate: {rate}",
+    "@conversionRate": {
+      "description": "Conversion rate display",
+      "placeholders": {
+        "rate": {
+          "type": "String"
+        }
+      }
+    },
+    "products": "Products",
+    "@products": {
+      "description": "Products section title"
+    },
+    "categories": "Categories",
+    "@categories": {
+      "description": "Categories section title"
+    }
+}
+  
