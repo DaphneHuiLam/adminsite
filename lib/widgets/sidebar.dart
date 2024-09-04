@@ -12,63 +12,65 @@ class Sidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 220,
-      decoration: BoxDecoration(
-        color: Colors.white, // Light background for sidebar
-      ),
+      color: Colors.white, // Sidebar background
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(
-                vertical:
-                    5.0), // Reduced padding to allow more space for the image
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Image.asset(
               'assets/images/industryday_redLogo03.png',
-              height: 86, // Increased height for a bigger image
+              height: 86, // Adjusted height for logo
             ),
           ),
           Divider(color: Colors.grey[300]),
+
+          // Menu items
           _buildMenuItem(
             context,
             icon: Icons.dashboard_outlined,
             title: 'Dashboard',
-            isActive: selectedIndex == 0,
-            onTap: () => onItemTapped(0),
+            index: 0,
           ),
           _buildMenuItem(
             context,
             icon: Icons.people_outline,
             title: 'Users',
-            isActive: selectedIndex == 1,
-            onTap: () => onItemTapped(1),
+            index: 1,
           ),
           _buildMenuItem(
             context,
             icon: Icons.business_outlined,
             title: 'Companies',
-            isActive: selectedIndex == 2,
-            onTap: () => onItemTapped(2),
+            index: 2,
           ),
           _buildMenuItem(
             context,
             icon: Icons.bar_chart_outlined,
             title: 'Help & Support',
-            isActive: selectedIndex == 3,
-            onTap: () => onItemTapped(3),
+            index: 3,
           ),
           Spacer(),
           Divider(color: Colors.grey[300]),
+
+          // Logout button
           ListTile(
-            leading: Icon(Icons.logout,
-                color: Colors.redAccent, size: 21), // Increased icon size
+            leading: Icon(
+              Icons.logout,
+              color: Colors.redAccent,
+              size: 21,
+            ),
             title: Text(
               'Logout',
               style: TextStyle(
-                  color: Colors.redAccent, fontSize: 18), // Increased font size
+                color: Colors.redAccent,
+                fontSize: 18,
+              ),
             ),
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: 22.0, vertical: 6.0), // Increased padding
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 22.0, vertical: 6.0),
             onTap: () {
-              // Handle logout
+              Navigator.of(context)
+                  .pushReplacementNamed('/logout'); // Navigate to logout page
             },
           ),
         ],
@@ -77,10 +79,8 @@ class Sidebar extends StatelessWidget {
   }
 
   Widget _buildMenuItem(BuildContext context,
-      {required IconData icon,
-      required String title,
-      required bool isActive,
-      required VoidCallback onTap}) {
+      {required IconData icon, required String title, required int index}) {
+    bool isActive = selectedIndex == index;
     return ListTile(
       leading: Icon(
         icon,
@@ -95,7 +95,7 @@ class Sidebar extends StatelessWidget {
         ),
       ),
       tileColor: isActive ? Colors.blue.withOpacity(0.1) : Colors.transparent,
-      onTap: onTap,
+      onTap: () => onItemTapped(index),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'pages/dashboard_page.dart';
 import 'pages/users_page.dart';
 import 'pages/companies_page.dart';
 import 'pages/help_support_page.dart';
+import 'pages/logout_page.dart';
 import 'widgets/sidebar.dart';
 import 'widgets/custom_footer.dart';
 
@@ -45,7 +46,16 @@ class MyApp extends StatelessWidget {
           selectionHandleColor: Colors.blue,
         ),
       ),
-      home: MyHomePage(),
+      // Defining routes
+      routes: {
+        '/': (context) => MyHomePage(),
+        '/dashboard': (context) => DashboardPage(),
+        '/users': (context) => UsersPage(),
+        '/companies': (context) => CompaniesPage(),
+        '/help-support': (context) => HelpSupportPage(),
+        '/logout': (context) => LogoutPage(),
+      },
+      initialRoute: '/', // Define the initial route
     );
   }
 }
@@ -89,8 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height:
-                            100, // Match the height of the sidebar logo area
+                        height: 100, // Match the height of the sidebar 咯、 area
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
